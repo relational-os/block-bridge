@@ -1,3 +1,5 @@
-import { RelationalOS } from "./RelationalOS";
+import { RelationalOS } from "./relationalOS";
 
-export { RelationalOS };
+import { OSBlock } from "./types";
+
+export { RelationalOS, OSBlock };

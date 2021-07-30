@@ -1,7 +1,7 @@
-// import { ethers } from "ethers";
-import { Block, BlockValidationResult } from "./types";
+import { ethers } from "ethers";
+import { OSBlock, BlockValidationResult } from "./types";
 
-export const addBlockDateTime = (block: Block): Block => {
+export const addBlockDateTime = (block: OSBlock): OSBlock => {
   block.datetime = new Date().toISOString();
   return block;
 };
@@ -13,7 +13,7 @@ function isISODate(s: string) {
   return d.toISOString() === s;
 }
 
-export function ValidateBlock(block: Block): BlockValidationResult {
+export function ValidateBlock(block: OSBlock): BlockValidationResult {
   var result: BlockValidationResult = {
     valid: true,
     errors: [""],
@@ -21,12 +21,12 @@ export function ValidateBlock(block: Block): BlockValidationResult {
 
   // Verify parent points to a valid block (is this a cid?) or null
 
-  // Verify the creator is an eth address (use web3.js)
-  // if (!ethers.utils.isAddress(block.creator)) {
-  //   result.errors.push(
-  //     `Address: ${block.creator} is not a valid Ethereum address`
-  //   );
-  // }
+  // Verify the creator is an eth address
+  if (block.creator && !ethers.utils.isAddress(block.creator)) {
+    result.errors.push(
+      `Address: ${block.creator} is not a valid Ethereum address`
+    );
+  }
 
   // Verify the datetime is ISO8061 + TZ
   if (block.datetime != null) {

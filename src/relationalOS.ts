@@ -1,8 +1,7 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { ContractTransaction } from "@ethersproject/contracts";
-import fetch from "node-fetch";
 
-import { Block, IPFSCallback, NewBlockCallbacks } from "./types";
+import { OSBlock as OSBlock, IPFSCallback, NewBlockCallbacks } from "./types";
 import { addBlockDateTime } from "./utils";
 import { ValidateBlock } from "./utils";
 import { Hexa__factory } from "@relational-os/contracts";
@@ -30,7 +29,7 @@ export class RelationalOS {
   }
 
   public async newBlock(
-    block: Block,
+    block: OSBlock,
     callbacks?: NewBlockCallbacks
   ): Promise<ContractTransaction> {
     // Add the datetime to the block
@@ -53,7 +52,7 @@ export class RelationalOS {
      is confirmed or not. Ideally this get's separated out to be generic
      for ContractTransaction. */
   public async newBlock2(
-    block: Block,
+    block: OSBlock,
     callbacks: NewBlockCallbacks
   ): Promise<number> {
     // Add the datetime to the block
@@ -73,7 +72,7 @@ export class RelationalOS {
   }
 
   private async NewBlockOnChain(
-    block: Block,
+    block: OSBlock,
     hash: string,
     callbacks: NewBlockCallbacks
   ): Promise<number> {
@@ -106,7 +105,7 @@ export class RelationalOS {
 
   // TODO: support images
   private async CreateBlockOnIPFS(
-    block: Block,
+    block: OSBlock,
     uploadComplete?: IPFSCallback
   ): Promise<string> {
     let uploadURL = `${this.ipfsURL}/uploadJSON`;

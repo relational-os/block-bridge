@@ -2,10 +2,10 @@ import fetch from "node-fetch";
 import { MockProvider } from "ethereum-waffle";
 import util from "util";
 
-import { Block, IPFSCallback } from "../src/types";
+import { OSBlock, IPFSCallback } from "../src/types";
 import { RelationalOS } from "../src";
 
-const BASIC_TEST_BLOCK: Block = {
+const BASIC_TEST_BLOCK: OSBlock = {
   parent: null,
   type: "text",
   context: "test context",

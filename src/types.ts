@@ -1,10 +1,10 @@
-export interface Block {
-  parent: Block | null;
-  //   creator: string; QUESTION DOES THIS FIELD NEED TO BE INCLUDED?
+export interface OSBlock {
+  parent?: OSBlock | null;
+  creator?: string; // does not need to be included on IPFS, but can be
   datetime?: string;
-  type: string;
-  context: string;
-  content: string;
+  type?: string;
+  context?: string;
+  content?: string;
 }
 
 export type IPFSCallback = (hash: string) => void;
