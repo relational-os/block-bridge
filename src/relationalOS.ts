@@ -6,7 +6,7 @@ import { addBlockDateTime } from "./utils";
 import { ValidateBlock } from "./utils";
 import { Hexa__factory } from "@relational-os/contracts";
 
-const HEXA_CONTRACT_ADDRESS = "0x108fF1243a5AEEE4A3dB061AB1FdbC4fa820207c";
+const HEXA_CONTRACT_ADDRESS = "0xA571D2C89FCA25c498bc8c13D882382254C556ac";
 
 export const INVALID_TOKEN_ID = 0x0;
 
