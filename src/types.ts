@@ -1,6 +1,7 @@
 export interface OSBlock {
+  id?: number | null;
   parent?: OSBlock | null;
-  creator?: string; // does not need to be included on IPFS, but can be
+  author?: string; // does not need to be included on IPFS, but can be
   datetime?: string;
   type?: string;
   context?: string;

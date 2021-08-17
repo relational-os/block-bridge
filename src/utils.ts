@@ -22,9 +22,9 @@ export function ValidateBlock(block: OSBlock): BlockValidationResult {
   // Verify parent points to a valid block (is this a cid?) or null
 
   // Verify the creator is an eth address
-  if (block.creator && !ethers.utils.isAddress(block.creator)) {
+  if (block.author && !ethers.utils.isAddress(block.author)) {
     result.errors.push(
-      `Address: ${block.creator} is not a valid Ethereum address`
+      `Address: ${block.author} is not a valid Ethereum address`
     );
   }
 
