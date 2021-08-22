@@ -5,7 +5,7 @@ export interface OSBlock {
   datetime?: string;
   type?: string;
   context?: string;
-  content?: string;
+  content?: string | File;
 }
 
 export type IPFSCallback = (hash: string) => void;

@@ -103,11 +103,50 @@ export class RelationalOS {
     return INVALID_TOKEN_ID;
   }
 
-  // TODO: support images
+  private async dataUrlToFile(
+    dataUrl: string,
+    fileName: string
+  ): Promise<File> {
+    const res: Response = await fetch(dataUrl);
+    const blob: Blob = await res.blob();
+    return new File([blob], fileName, { type: "image/png" });
+  }
+
+  // TODO: wording?
+  private async UploadImageToIPFS(block: OSBlock): Promise<string> {
+    if (typeof block.content == "string") {
+      block.content = await this.dataUrlToFile(block.content, "test");
+    }
+
+    // Upload file to IPFS
+    const body = new FormData();
+    //@ts-ignore
+    body.append("files", block.content);
+
+    // Upload to IPFS first
+    let imageUploadURL = `${this.ipfsURL}/upload`;
+    const { hash: blockHash } = await fetch(imageUploadURL, {
+      method: "post",
+      headers: {
+        // "Content-Type": "image/*",
+        // "Access-Control-Allow-Origin": "*",
+      },
+      body,
+    }).then((res) => {
+      return res.json();
+    });
+
+    return blockHash;
+  }
+
   private async CreateBlockOnIPFS(
     block: OSBlock,
     uploadComplete?: IPFSCallback
   ): Promise<string> {
+    if (block.type == "image") {
+      block.content = await this.UploadImageToIPFS(block);
+    }
+
     let uploadURL = `${this.ipfsURL}/uploadJSON`;
     console.log("pushing to", uploadURL);
 
